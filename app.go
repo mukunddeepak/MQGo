@@ -96,6 +96,7 @@ func main(){
     //fmt.Printf("%T\n", i.ProductImages)
     prod := Product{Product_Name:i.Product_Name, Product_Description:i.ProductDescription, Product_Price:i.ProductPrice,Product_Images:i.ProductImages,}
     db.Save(&prod)
+    c.JSON(200, "Product Added!")
     fmt.Println("Product ID:",prod.Product_ID)
     //fmt.Printf("%T\n", prod.Product_Images)
     //For testing purposes, i used the below code.
