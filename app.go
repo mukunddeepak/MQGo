@@ -11,6 +11,7 @@ import (
 	amqp "github.com/rabbitmq/amqp091-go"
 	"time"
 )
+//GORM Product Model
 type Product struct{
 	Product_ID int `gorm:"primaryKey" gorm:"column:product_id"`
 	Product_Name string `gorm:"column:product_name"`
@@ -21,12 +22,13 @@ type Product struct{
 	Created_At time.Time `gorm:"column:created_at"`
 	Updated_At time.Time `gorm:"column:updated_at"`
 }
+// GORM User Model 
 type User struct{
 	ID int `gorm:"column:id" gorm:"primaryKey"`
 	Name string `gorm:"column:name"`
 	Mobile int64 `gorm:"column:mobile"`
 	Latitude float64 `gorm:"column:latitude"`
-	Longitude float64 `gorm:"column:latitude"`
+	Longitude float64 `gorm:"column:longitude"`
 	Created_At time.Time `gorm:"column:created_at"`
 	Updated_At time.Time `gorm:"column:updated_at"`
 }
@@ -93,17 +95,10 @@ func main(){
     if err!=nil{
       c.JSON(400, gin.H{"error":err,})
     }
-    //fmt.Printf("%T\n", i.ProductImages)
     prod := Product{Product_Name:i.Product_Name, Product_Description:i.ProductDescription, Product_Price:i.ProductPrice,Product_Images:i.ProductImages,}
     db.Save(&prod)
     c.JSON(200, "Product Added!")
     fmt.Println("Product ID:",prod.Product_ID)
-    //fmt.Printf("%T\n", prod.Product_Images)
-    //For testing purposes, i used the below code.
-    /*fmt.Printf("User ID:%d\nProduct Name:%s\nProduct Description:%s\nProduct Price:%f\n", i.User_ID, i.Product_Name, i.ProductDescription, i.ProductPrice);
-    for _,value := range i.ProductImages{
-      fmt.Printf("%s\n",value)
-    }*/
     body := prod.Product_ID
 		err = ch.PublishWithContext(
 			ctx,
