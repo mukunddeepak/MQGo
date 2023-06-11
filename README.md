@@ -1,4 +1,4 @@
-# Golang Zocket Assignment
+# MQGo - Implementing basically producer consumer with message queue in golang
 
 ## Instructions to run the program:
 
